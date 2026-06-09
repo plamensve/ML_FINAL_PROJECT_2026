@@ -1,8 +1,22 @@
 from pathlib import Path
+
+import seaborn as sns
 from matplotlib import pyplot as plt
 
 figures_dir = Path("../reports/figures")
 figures_dir.mkdir(parents=True, exist_ok=True)
+
+def save_fig(figure_name):
+    """
+    :param figure_name: string
+    :return: saved figure
+    """
+    plt.savefig(
+        figures_dir / figure_name,
+        dpi=300,
+        bbox_inches="tight"
+    )
+
 
 def plot_age_distribution(data):
     plt.figure(figsize=(8, 5))
@@ -100,7 +114,25 @@ def football_countries(data):
     plt.show()
 
 
+def show_correlation_matrix(correlation_matrix, corr_method, figure_name=None):
+    """
+    :param corr_method: string
+    :param correlation_matrix: dataframe
+    :param figure_name: string
+    :return: correlation matrix
+    """
 
+    # Create the heatmap
+    plt.figure(figsize=(18, 16))
+    plt.rcParams.update({'font.size': 10})
+    sns.heatmap(correlation_matrix, cmap='viridis', vmin=-1, vmax=1, center=0, annot=True, fmt=".2f", square=True,
+                linewidths=.5)
+    plt.title(f'Correlation matrix [Personal performance stats] / {corr_method}')
+
+    if figure_name:
+        save_fig(figure_name)
+
+    plt.show()
 
 
 

@@ -2,6 +2,10 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 
 def elbow_method_apply(data):
+    """
+    :param data: dataframe
+    :return: None, shows elbow plot
+    """
     # Create an empty list where the inertia values for each K-Means model will be stored.
     inertias = []
 
@@ -28,7 +32,10 @@ def elbow_method_apply(data):
 
 def train_kmeans_model(data, n_clusters=5, random_state=42):
     """
-    Train a KMeans clustering model and return the trained model and cluster labels.
+    :param data: dataframe
+    :param n_clusters: int
+    :param random_state: default int
+    :return: model, labels
     """
 
     model = KMeans(

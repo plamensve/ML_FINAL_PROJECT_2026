@@ -27,6 +27,11 @@ def save_fig(figure_name, save_dir=None):
 
 
 def plot_age_distribution(data):
+    """
+    :param data: dataframe
+    :return: None. shows plot
+    """
+
     plt.figure(figsize=(8, 5))
 
     mean_age = data["age"].mean()
@@ -53,6 +58,11 @@ def plot_age_distribution(data):
     plt.show()
 
 def height_distribution(data):
+    """
+    :param data: dataframe
+    :return: None, shows plot
+    """
+
     plt.figure(figsize=(8, 5))
     mean_height = data['height_cm'].mean()
 
@@ -72,6 +82,11 @@ def height_distribution(data):
     plt.show()
 
 def weight_distribution(data):
+    """
+    :param data: dataframe
+    :return: None, shows plot
+    """
+
     plt.figure(figsize=(8, 5))
 
     # Calculate the mean value of the players weight
@@ -100,6 +115,11 @@ def weight_distribution(data):
     plt.show()
 
 def football_countries(data):
+    """
+    :param data: dataframe
+    :return: None, shows plot
+    """
+
     # Get the top 10 nationalities by number of players
     top_10_football_countries = data['nationality'].value_counts().head(10)
     plt.figure(figsize=(10, 5))

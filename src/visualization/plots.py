@@ -6,13 +6,21 @@ from matplotlib import pyplot as plt
 figures_dir = Path("../reports/figures")
 figures_dir.mkdir(parents=True, exist_ok=True)
 
-def save_fig(figure_name):
+def save_fig(figure_name, save_dir=None):
     """
     :param figure_name: string
+    :param save_dir: string or Path
     :return: saved figure
     """
+
+    if save_dir is None:
+        save_dir = Path.cwd()
+
+    save_dir = Path(save_dir)
+    save_dir.mkdir(parents=True, exist_ok=True)
+
     plt.savefig(
-        figures_dir / figure_name,
+        save_dir / figure_name,
         dpi=300,
         bbox_inches="tight"
     )
@@ -114,23 +122,34 @@ def football_countries(data):
     plt.show()
 
 
-def show_correlation_matrix(correlation_matrix, corr_method, figure_name=None):
+def show_correlation_matrix(correlation_matrix, corr_method, figure_name=None, save_dir=None):
     """
     :param corr_method: string
     :param correlation_matrix: dataframe
     :param figure_name: string
+    :param save_dir: string or Path
     :return: correlation matrix
     """
 
-    # Create the heatmap
     plt.figure(figsize=(18, 16))
     plt.rcParams.update({'font.size': 10})
-    sns.heatmap(correlation_matrix, cmap='viridis', vmin=-1, vmax=1, center=0, annot=True, fmt=".2f", square=True,
-                linewidths=.5)
-    plt.title(f'Correlation matrix [Personal performance stats] / {corr_method}')
+
+    sns.heatmap(
+        correlation_matrix,
+        cmap='viridis',
+        vmin=-1,
+        vmax=1,
+        center=0,
+        annot=True,
+        fmt=".2f",
+        square=True,
+        linewidths=.5
+    )
+
+    plt.title(f'Correlation matrix  / {figure_name} / {corr_method}')
 
     if figure_name:
-        save_fig(figure_name)
+        save_fig(figure_name, save_dir=save_dir)
 
     plt.show()
 
